@@ -2,6 +2,7 @@ package com.eramusugoda.bannersliderexample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -37,12 +38,20 @@ public class MainActivity extends AppCompatActivity {
         mSliderLayout1.setAdapter(mAdapter1);
 
         mSliderLayout2 = findViewById(R.id.imageSlider2);
+        mSliderLayout2.setAutoScrolling(false);
         mSliderLayout2.setIndicatorAnimation(IndicatorAnimations.SWAP); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
         mSliderLayout2.setSliderTransformAnimation(SliderAnimations.FADETRANSFORMATION);
         mSliderLayout2.setScrollTimeInSec(5); //set scroll delay in seconds :
         mSliderLayout2.setAdapter(mAdapter2);
 
         setSliderViews();
+
+        findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSliderLayout2.getSliderPager().setCurrentItem(mSliderLayout2.getCurrentPagePosition() + 1, true);
+            }
+        });
     }
 
     private void setSliderViews() {

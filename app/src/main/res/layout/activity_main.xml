@@ -24,6 +24,14 @@
             android:id="@+id/imageSlider2"
             android:layout_width="match_parent"
             android:layout_height="300dp" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Change Page"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
 </ScrollView>
