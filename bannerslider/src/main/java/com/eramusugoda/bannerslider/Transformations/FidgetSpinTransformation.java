@@ -1,4 +1,4 @@
-package com.eramusugoda.autoimageslider.Transformations;
+package com.eramusugoda.bannerslider.Transformations;
 
 import android.support.v4.view.ViewPager;
 import android.view.View;

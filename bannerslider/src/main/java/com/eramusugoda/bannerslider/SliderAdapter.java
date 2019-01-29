@@ -1,6 +1,6 @@
 package com.eramusugoda.bannerslider;
 
-import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,21 +8,21 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 
-class SliderAdapter extends PagerAdapter {
+public abstract class SliderAdapter extends PagerAdapter {
 
-    private Context context;
     private ArrayList<SliderView> sliderViews = new ArrayList<>();
 
-    SliderAdapter(Context context) {
-        this.context = context;
+    public ArrayList<SliderView> getSliderViews() {
+        return sliderViews;
     }
 
-    public void setSliderViews(ArrayList<SliderView> sliderViews) {
-        this.sliderViews = sliderViews;
-    }
-
-    void addSliderView(SliderView view) {
+    public void addSliderView(SliderView view) {
         sliderViews.add(view);
+        notifyDataSetChanged();
+    }
+
+    public void addSliderViews(ArrayList<SliderView> sliderViews) {
+        this.sliderViews = sliderViews;
         notifyDataSetChanged();
     }
 
@@ -44,12 +44,13 @@ class SliderAdapter extends PagerAdapter {
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;
     }
 
+    @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
         SliderView imageSliderView = sliderViews.get(position);
         View v = imageSliderView.getView();
         container.addView(v);
@@ -57,7 +58,7 @@ class SliderAdapter extends PagerAdapter {
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View) object);
     }
 }

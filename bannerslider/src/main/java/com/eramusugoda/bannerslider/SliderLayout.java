@@ -41,7 +41,7 @@ public class SliderLayout extends FrameLayout implements CircularSliderHandle.Cu
 
 
     private static final long DELAY_MS = 500;
-    private static PagerAdapter mFlippingPagerAdapter;
+    private SliderAdapter mFlippingPagerAdapter;
     private int currentPage = 0;
     private CircularSliderHandle circularSliderHandle;
     private ViewPager mSliderPager;
@@ -76,7 +76,7 @@ public class SliderLayout extends FrameLayout implements CircularSliderHandle.Cu
         startAutoCycle();
     }
 
-    private static PagerAdapter getFlippingPagerAdapter() {
+    private PagerAdapter getFlippingPagerAdapter() {
         return mFlippingPagerAdapter;
     }
 
@@ -226,29 +226,36 @@ public class SliderLayout extends FrameLayout implements CircularSliderHandle.Cu
         pagerIndicator = view.findViewById(R.id.pager_indicator);
         pagerIndicator.setDynamicCount(true);
 
-        mFlippingPagerAdapter = new SliderAdapter(context);
-
-        mSliderPager.setAdapter(mFlippingPagerAdapter);
-
         // Handler for onPageChangeListener
         circularSliderHandle = new CircularSliderHandle(mSliderPager);
         circularSliderHandle.setCurrentPageListener(this);
         mSliderPager.addOnPageChangeListener(circularSliderHandle);
+    }
 
+    public void setAdapter(SliderAdapter adapter) {
+        mFlippingPagerAdapter = adapter == null ? new DefaultSliderAdapter() : adapter;
+        mSliderPager.setAdapter(mFlippingPagerAdapter);
+        if (pagerIndicator != null && mSliderPager != null) {
+            pagerIndicator.setViewPager(mSliderPager);
+        }
         //Starting auto cycle at the time of setting up of layout
         startAutoCycle();
     }
 
-    public void clearSliderViews() {
-        ((SliderAdapter) mFlippingPagerAdapter).removeAllSliderViews();
+    public SliderAdapter getAdapter() {
+        return mFlippingPagerAdapter;
     }
 
-    public void addSliderView(SliderView sliderView) {
-        ((SliderAdapter) mFlippingPagerAdapter).addSliderView(sliderView);
-        if (pagerIndicator != null && mSliderPager != null) {
-            pagerIndicator.setViewPager(mSliderPager);
-        }
-    }
+//    public void clearSliderViews() {
+//        mFlippingPagerAdapter.removeAllSliderViews();
+//    }
+
+//    public void addSliderView(SliderView sliderView) {
+//        mFlippingPagerAdapter.addSliderView(sliderView);
+//        if (pagerIndicator != null && mSliderPager != null) {
+//            pagerIndicator.setViewPager(mSliderPager);
+//        }
+//    }
 
     private void startAutoCycle() {
 
