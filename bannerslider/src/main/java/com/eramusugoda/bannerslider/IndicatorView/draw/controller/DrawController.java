@@ -1,9 +1,11 @@
 package com.eramusugoda.bannerslider.IndicatorView.draw.controller;
 
 import android.graphics.Canvas;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.MotionEvent;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.eramusugoda.bannerslider.IndicatorView.animation.data.Value;
 import com.eramusugoda.bannerslider.IndicatorView.animation.type.AnimationType;
 import com.eramusugoda.bannerslider.IndicatorView.draw.data.Indicator;

@@ -2,12 +2,13 @@ package com.eramusugoda.bannerslider;
 
 import android.content.Context;
 import android.os.Handler;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.eramusugoda.bannerslider.IndicatorView.PageIndicatorView;
 import com.eramusugoda.bannerslider.IndicatorView.animation.type.AnimationType;
@@ -232,6 +233,10 @@ public class SliderLayout extends FrameLayout implements CircularSliderHandle.Cu
         mSliderPager.addOnPageChangeListener(circularSliderHandle);
     }
 
+    public SliderAdapter getAdapter() {
+        return mFlippingPagerAdapter;
+    }
+
     public void setAdapter(SliderAdapter adapter) {
         mFlippingPagerAdapter = adapter == null ? new DefaultSliderAdapter() : adapter;
         mSliderPager.setAdapter(mFlippingPagerAdapter);
@@ -240,10 +245,6 @@ public class SliderLayout extends FrameLayout implements CircularSliderHandle.Cu
         }
         //Starting auto cycle at the time of setting up of layout
         startAutoCycle();
-    }
-
-    public SliderAdapter getAdapter() {
-        return mFlippingPagerAdapter;
     }
 
     public ViewPager getSliderPager() {
@@ -262,7 +263,7 @@ public class SliderLayout extends FrameLayout implements CircularSliderHandle.Cu
         //Cancel If Thread is Running
         final Runnable scrollingThread = new Runnable() {
             public void run() {
-                if (currentPage == getFlippingPagerAdapter().getCount()) {
+                if (getFlippingPagerAdapter() == null || currentPage == getFlippingPagerAdapter().getCount()) {
                     currentPage = 0;
                 }
                 // true set for smooth transition between pager

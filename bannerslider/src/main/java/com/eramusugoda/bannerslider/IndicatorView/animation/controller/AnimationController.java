@@ -1,6 +1,6 @@
 package com.eramusugoda.bannerslider.IndicatorView.animation.controller;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.eramusugoda.bannerslider.IndicatorView.animation.type.AnimationType;
 import com.eramusugoda.bannerslider.IndicatorView.animation.type.BaseAnimation;

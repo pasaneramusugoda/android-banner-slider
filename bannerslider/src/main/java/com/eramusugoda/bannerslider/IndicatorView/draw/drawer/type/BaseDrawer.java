@@ -1,7 +1,9 @@
 package com.eramusugoda.bannerslider.IndicatorView.draw.drawer.type;
 
 import android.graphics.Paint;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
+
 import com.eramusugoda.bannerslider.IndicatorView.draw.data.Indicator;
 
 class BaseDrawer {

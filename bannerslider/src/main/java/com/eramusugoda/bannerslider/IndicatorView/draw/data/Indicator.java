@@ -1,7 +1,9 @@
 package com.eramusugoda.bannerslider.IndicatorView.draw.data;
 
-import android.support.annotation.NonNull;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+
 import com.eramusugoda.bannerslider.IndicatorView.animation.type.AnimationType;
 
 public class Indicator {

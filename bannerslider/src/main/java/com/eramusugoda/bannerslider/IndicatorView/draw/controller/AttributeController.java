@@ -3,16 +3,22 @@ package com.eramusugoda.bannerslider.IndicatorView.draw.controller;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
-import com.eramusugoda.bannerslider.IndicatorView.utils.DensityUtils;
-import com.eramusugoda.bannerslider.IndicatorView.animation.type.*;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.eramusugoda.bannerslider.IndicatorView.animation.type.AnimationType;
+import com.eramusugoda.bannerslider.IndicatorView.animation.type.BaseAnimation;
+import com.eramusugoda.bannerslider.IndicatorView.animation.type.ColorAnimation;
+import com.eramusugoda.bannerslider.IndicatorView.animation.type.FillAnimation;
+import com.eramusugoda.bannerslider.IndicatorView.animation.type.ScaleAnimation;
 import com.eramusugoda.bannerslider.IndicatorView.draw.data.Indicator;
-import com.eramusugoda.bannerslider.IndicatorView.draw.data.Orientation;;
+import com.eramusugoda.bannerslider.IndicatorView.draw.data.Orientation;
 import com.eramusugoda.bannerslider.IndicatorView.draw.data.RtlMode;
-import com.eramusugoda.bannerslider.R;;
+import com.eramusugoda.bannerslider.IndicatorView.utils.DensityUtils;
+import com.eramusugoda.bannerslider.R;
 
 public class AttributeController {
 

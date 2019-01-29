@@ -1,10 +1,18 @@
 package com.eramusugoda.bannerslider.IndicatorView.animation.controller;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.eramusugoda.bannerslider.IndicatorView.animation.data.Value;
-import com.eramusugoda.bannerslider.IndicatorView.animation.type.*;
+import com.eramusugoda.bannerslider.IndicatorView.animation.type.ColorAnimation;
+import com.eramusugoda.bannerslider.IndicatorView.animation.type.DropAnimation;
+import com.eramusugoda.bannerslider.IndicatorView.animation.type.FillAnimation;
+import com.eramusugoda.bannerslider.IndicatorView.animation.type.ScaleAnimation;
+import com.eramusugoda.bannerslider.IndicatorView.animation.type.ScaleDownAnimation;
+import com.eramusugoda.bannerslider.IndicatorView.animation.type.SlideAnimation;
+import com.eramusugoda.bannerslider.IndicatorView.animation.type.SwapAnimation;
+import com.eramusugoda.bannerslider.IndicatorView.animation.type.ThinWormAnimation;
+import com.eramusugoda.bannerslider.IndicatorView.animation.type.WormAnimation;
 
 public class ValueController {
 

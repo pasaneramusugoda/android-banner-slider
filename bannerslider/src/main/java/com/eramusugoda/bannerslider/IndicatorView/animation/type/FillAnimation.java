@@ -3,8 +3,10 @@ package com.eramusugoda.bannerslider.IndicatorView.animation.type;
 import android.animation.IntEvaluator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
-import android.support.annotation.NonNull;
 import android.view.animation.AccelerateDecelerateInterpolator;
+
+import androidx.annotation.NonNull;
+
 import com.eramusugoda.bannerslider.IndicatorView.animation.controller.ValueController;
 import com.eramusugoda.bannerslider.IndicatorView.animation.data.type.FillAnimationValue;
 

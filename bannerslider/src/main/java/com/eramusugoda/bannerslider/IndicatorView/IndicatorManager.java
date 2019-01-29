@@ -1,6 +1,7 @@
 package com.eramusugoda.bannerslider.IndicatorView;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
+
 import com.eramusugoda.bannerslider.IndicatorView.animation.AnimationManager;
 import com.eramusugoda.bannerslider.IndicatorView.animation.controller.ValueController;
 import com.eramusugoda.bannerslider.IndicatorView.animation.data.Value;

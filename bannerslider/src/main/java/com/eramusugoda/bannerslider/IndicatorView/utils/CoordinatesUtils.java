@@ -1,8 +1,10 @@
 package com.eramusugoda.bannerslider.IndicatorView.utils;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Pair;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.eramusugoda.bannerslider.IndicatorView.animation.type.AnimationType;
 import com.eramusugoda.bannerslider.IndicatorView.draw.data.Indicator;
 import com.eramusugoda.bannerslider.IndicatorView.draw.data.Orientation;

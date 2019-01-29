@@ -1,8 +1,9 @@
 package com.eramusugoda.bannerslider.Transformations;
 
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
+
+import androidx.viewpager.widget.ViewPager;
 
 public class HorizontalFlipTransformation implements ViewPager.PageTransformer {
     @Override

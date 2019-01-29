@@ -1,7 +1,14 @@
 package com.eramusugoda.bannerslider.IndicatorView.animation.data;
 
-import android.support.annotation.NonNull;
-import com.eramusugoda.bannerslider.IndicatorView.animation.data.type.*;
+import androidx.annotation.NonNull;
+
+import com.eramusugoda.bannerslider.IndicatorView.animation.data.type.ColorAnimationValue;
+import com.eramusugoda.bannerslider.IndicatorView.animation.data.type.DropAnimationValue;
+import com.eramusugoda.bannerslider.IndicatorView.animation.data.type.FillAnimationValue;
+import com.eramusugoda.bannerslider.IndicatorView.animation.data.type.ScaleAnimationValue;
+import com.eramusugoda.bannerslider.IndicatorView.animation.data.type.SwapAnimationValue;
+import com.eramusugoda.bannerslider.IndicatorView.animation.data.type.ThinWormAnimationValue;
+import com.eramusugoda.bannerslider.IndicatorView.animation.data.type.WormAnimationValue;
 
 public class AnimationValue {
 

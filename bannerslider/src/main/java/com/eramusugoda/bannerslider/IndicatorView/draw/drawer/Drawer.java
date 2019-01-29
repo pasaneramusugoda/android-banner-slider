@@ -2,10 +2,21 @@ package com.eramusugoda.bannerslider.IndicatorView.draw.drawer;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
+
 import com.eramusugoda.bannerslider.IndicatorView.animation.data.Value;
 import com.eramusugoda.bannerslider.IndicatorView.draw.data.Indicator;
-import com.eramusugoda.bannerslider.IndicatorView.draw.drawer.type.*;
+import com.eramusugoda.bannerslider.IndicatorView.draw.drawer.type.BasicDrawer;
+import com.eramusugoda.bannerslider.IndicatorView.draw.drawer.type.ColorDrawer;
+import com.eramusugoda.bannerslider.IndicatorView.draw.drawer.type.DropDrawer;
+import com.eramusugoda.bannerslider.IndicatorView.draw.drawer.type.FillDrawer;
+import com.eramusugoda.bannerslider.IndicatorView.draw.drawer.type.ScaleDownDrawer;
+import com.eramusugoda.bannerslider.IndicatorView.draw.drawer.type.ScaleDrawer;
+import com.eramusugoda.bannerslider.IndicatorView.draw.drawer.type.SlideDrawer;
+import com.eramusugoda.bannerslider.IndicatorView.draw.drawer.type.SwapDrawer;
+import com.eramusugoda.bannerslider.IndicatorView.draw.drawer.type.ThinWormDrawer;
+import com.eramusugoda.bannerslider.IndicatorView.draw.drawer.type.WormDrawer;
 
 public class Drawer {
 

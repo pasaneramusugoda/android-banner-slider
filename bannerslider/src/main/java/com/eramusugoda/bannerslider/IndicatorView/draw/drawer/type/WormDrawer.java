@@ -3,7 +3,9 @@ package com.eramusugoda.bannerslider.IndicatorView.draw.drawer.type;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
+
 import com.eramusugoda.bannerslider.IndicatorView.animation.data.Value;
 import com.eramusugoda.bannerslider.IndicatorView.animation.data.type.WormAnimationValue;
 import com.eramusugoda.bannerslider.IndicatorView.draw.data.Indicator;

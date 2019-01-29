@@ -5,10 +5,11 @@ import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.support.annotation.DrawableRes;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.annotation.DrawableRes;
 
 import java.io.File;
 import java.io.FileOutputStream;

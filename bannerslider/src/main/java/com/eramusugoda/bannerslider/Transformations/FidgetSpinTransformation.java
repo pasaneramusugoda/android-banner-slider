@@ -1,7 +1,8 @@
 package com.eramusugoda.bannerslider.Transformations;
 
-import android.support.v4.view.ViewPager;
 import android.view.View;
+
+import androidx.viewpager.widget.ViewPager;
 
 public class FidgetSpinTransformation implements ViewPager.PageTransformer {
     @Override
