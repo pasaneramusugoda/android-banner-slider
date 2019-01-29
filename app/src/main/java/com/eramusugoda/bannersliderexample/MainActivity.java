@@ -5,9 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.eramusugoda.bannerslider.DefaultSliderAdapter;
 import com.eramusugoda.bannerslider.DefaultSliderView;
 import com.eramusugoda.bannerslider.IndicatorAnimations;
-import com.eramusugoda.bannerslider.SliderAdapter;
 import com.eramusugoda.bannerslider.SliderAnimations;
 import com.eramusugoda.bannerslider.SliderLayout;
 import com.eramusugoda.bannerslider.SliderView;
@@ -15,19 +15,20 @@ import com.eramusugoda.bannerslider.SliderView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
     SliderLayout mSliderLayout1;
     SliderLayout mSliderLayout2;
 
-    SliderAdapter1 mAdapter1;
-    SliderAdapter2 mAdapter2;
+    DefaultSliderAdapter mAdapter1;
+    DefaultSliderAdapter mAdapter2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mAdapter1 = new SliderAdapter1();
-        mAdapter2 = new SliderAdapter2();
+        mAdapter1 = new DefaultSliderAdapter();
+        mAdapter2 = new DefaultSliderAdapter();
 
         mSliderLayout1 = findViewById(R.id.imageSlider1);
         mSliderLayout1.setIndicatorAnimation(IndicatorAnimations.SWAP); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
@@ -78,25 +79,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-                //at last add this view in your layout :
-//                if (ii == 0) mSliderLayout1.addSliderView(sliderView);
-//                else mSliderLayout1.addSliderView(sliderView);
-
                 if (ii == 0) mAdapter1.addSliderView(sliderView);
                 else mAdapter2.addSliderView(sliderView);
             }
         }
-    }
-}
-
-class SliderAdapter1 extends SliderAdapter {
-    SliderAdapter1() {
-
-    }
-}
-
-class SliderAdapter2 extends SliderAdapter {
-    SliderAdapter2() {
-
     }
 }

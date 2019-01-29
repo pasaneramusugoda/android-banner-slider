@@ -1,8 +1,14 @@
 package com.eramusugoda.bannerslider;
 
-class DefaultSliderAdapter extends SliderAdapter {
+import java.util.ArrayList;
 
-    DefaultSliderAdapter() {
-        super();
+public class DefaultSliderAdapter extends SliderAdapter {
+
+    public DefaultSliderAdapter() {
+        new DefaultSliderAdapter(null);
+    }
+
+    public DefaultSliderAdapter(ArrayList<SliderView> sliderViews) {
+        super(sliderViews);
     }
 }
