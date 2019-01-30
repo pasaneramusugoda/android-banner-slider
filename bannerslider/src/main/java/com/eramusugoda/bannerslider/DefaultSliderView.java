@@ -1,3 +1,9 @@
+/*
+ * Created by Pasan on 1/30/19 12:59 PM
+ * Copyright (c) 2019 . All rights reserved.
+ * Last modified 1/30/19 12:56 PM
+ */
+
 package com.eramusugoda.bannerslider;
 
 import android.annotation.SuppressLint;
@@ -39,7 +45,7 @@ public class DefaultSliderView extends SliderView {
         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
             if (onSliderImageReadyListener != null)
                 onSliderImageReadyListener.onSliderImageIsReady();
-            return true;
+            return false;
         }
     };
 

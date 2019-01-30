@@ -1,0 +1,8 @@
+<component name="CopyrightManager">
+  <settings default="eramusugoda">
+    <module2copyright>
+      <element module="All" copyright="eramusugoda" />
+    </module2copyright>
+    <LanguageOptions name="JAVA" />
+  </settings>
+</component>
