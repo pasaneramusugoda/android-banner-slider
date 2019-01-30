@@ -341,4 +341,16 @@ public class SliderLayout extends FrameLayout implements OnSlideChangeListener {
 
         return mSliderAdapter.getSliderViews();
     }
+
+    public void setCurrentItem(int position) {
+        if (position < 0 || position >= mSliderAdapter.getCount())
+            throw new IndexOutOfBoundsException();
+        mSliderPager.setCurrentItem(position, true);
+    }
+
+    public void setCurrentItem(SliderView sliderView) {
+        if (sliderView == null)
+            throw new NullPointerException();
+        mSliderPager.setCurrentItem(getPosition(sliderView), true);
+    }
 }
