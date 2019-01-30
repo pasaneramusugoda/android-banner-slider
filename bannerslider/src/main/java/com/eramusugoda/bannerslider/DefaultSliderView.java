@@ -1,9 +1,3 @@
-/*
- * Created by Pasan on 1/30/19 2:12 PM
- * Copyright (c) 2019 . All rights reserved.
- * Last modified 1/30/19 2:09 PM
- */
-
 package com.eramusugoda.bannerslider;
 
 import android.annotation.SuppressLint;
