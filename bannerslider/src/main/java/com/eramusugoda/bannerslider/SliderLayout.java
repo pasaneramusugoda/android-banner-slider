@@ -3,11 +3,11 @@ package com.eramusugoda.bannerslider;
 import android.content.Context;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.eramusugoda.bannerslider.events.OnSlideChangeListener;
@@ -49,6 +49,7 @@ import java.util.TimerTask;
 
 public class SliderLayout extends FrameLayout implements OnSlideChangeListener {
 
+    private static final String TAG = SliderLayout.class.getSimpleName();
     private static final long DELAY_MS = 500;
     private SliderAdapter mSliderAdapter;
     private int currentPage = 0;
@@ -112,10 +113,6 @@ public class SliderLayout extends FrameLayout implements OnSlideChangeListener {
     public void setAutoScrolling(boolean autoScrolling) {
         this.autoScrolling = autoScrolling;
         startAutoCycle();
-    }
-
-    private PagerAdapter getSliderAdapter() {
-        return mSliderAdapter;
     }
 
     public int getScrollTimeInSec() {
@@ -211,8 +208,10 @@ public class SliderLayout extends FrameLayout implements OnSlideChangeListener {
     }
 
     public int getCurrentPagePosition() {
-        if (getSliderAdapter() != null) {
-            return mSliderPager.getCurrentItem() % mSliderAdapter.getCount();
+        if (mSliderAdapter != null) {
+            int item = mSliderPager.getCurrentItem() % mSliderAdapter.getCount();
+            Log.d(TAG, "getCurrentPagePosition: " + item);
+            return item;
         } else {
             throw new NullPointerException("Adapter not set");
         }
@@ -268,7 +267,7 @@ public class SliderLayout extends FrameLayout implements OnSlideChangeListener {
         pagerIndicator.setDynamicCount(true);
 
         // Handler for onPageChangeListener
-        CircularSliderHandle circularSliderHandle = new CircularSliderHandle(mSliderPager);
+        CircularSliderHandle circularSliderHandle = new CircularSliderHandle();
         circularSliderHandle.setOnSlideChangeListener(this);
 
         mSliderPager.addOnPageChangeListener(circularSliderHandle);
@@ -299,7 +298,7 @@ public class SliderLayout extends FrameLayout implements OnSlideChangeListener {
         //Cancel If Thread is Running
         final Runnable scrollingThread = new Runnable() {
             public void run() {
-                if (getSliderAdapter() == null || currentPage == getSliderAdapter().getCount()) {
+                if (mSliderAdapter == null || currentPage == mSliderAdapter.getCount()) {
                     currentPage = 0;
                 }
                 // true set for smooth transition between pager

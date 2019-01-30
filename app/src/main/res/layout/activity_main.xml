@@ -18,12 +18,16 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="56dp" />
+            android:layout_height="16dp" />
 
         <com.eramusugoda.bannerslider.SliderLayout
             android:id="@+id/imageSlider2"
             android:layout_width="match_parent"
             android:layout_height="300dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
 
         <Button
             android:id="@+id/button1"
@@ -32,6 +36,10 @@
             android:layout_gravity="center"
             android:text="Change Page"
             tools:ignore="HardcodedText" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
     </LinearLayout>
 
 </ScrollView>

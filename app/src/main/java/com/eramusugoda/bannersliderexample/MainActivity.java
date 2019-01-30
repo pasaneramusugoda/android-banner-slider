@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSliderLayout2.getSliderPager().setCurrentItem(mSliderLayout2.getCurrentPagePosition() + 1, true);
+                mSliderLayout2.setCurrentItem(mSliderLayout2.getSliderItemCount() == mSliderLayout2.getCurrentPagePosition() + 1 ? 0 : mSliderLayout2.getCurrentPagePosition() + 1);
             }
         });
     }
