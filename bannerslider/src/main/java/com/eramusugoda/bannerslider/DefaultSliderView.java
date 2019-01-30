@@ -37,8 +37,7 @@ public class DefaultSliderView extends SliderView {
 
         @Override
         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-            if (onSliderImageReadyListener != null)
-                onSliderImageReadyListener.onSliderImageIsReady();
+            notifySliderImageIsReady();
             return false;
         }
     };

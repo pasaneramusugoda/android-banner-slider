@@ -23,27 +23,41 @@ public abstract class SliderView {
     @DrawableRes
     protected int imageRes = 0;
     protected OnSlideClickListener onSliderClickListener;
-    protected OnSliderImageReadyListener onSliderImageReadyListener;
     protected String description;
     protected String imageUrl;
     protected ImageView.ScaleType scaleType = ImageView.ScaleType.CENTER_CROP;
     protected Context context;
+    protected boolean notifyOnce = false;
+    protected boolean hasNotified = false;
+    private OnSliderImageReadyListener onSliderImageReadyListener;
+
+    SliderView(Context context) {
+        this.context = context;
+    }
 
     void setOnSliderClickListener(OnSlideClickListener onSliderClickListener) {
         this.onSliderClickListener = onSliderClickListener;
     }
 
     void setOnSliderImageReadyListener(OnSliderImageReadyListener onSliderImageReadyListener) {
+        setOnSliderImageReadyListener(onSliderImageReadyListener, false);
+    }
+
+    void setOnSliderImageReadyListener(OnSliderImageReadyListener onSliderImageReadyListener, boolean notifyOnce) {
         this.onSliderImageReadyListener = onSliderImageReadyListener;
+        this.notifyOnce = notifyOnce;
+    }
+
+    void notifySliderImageIsReady() {
+        if (onSliderImageReadyListener != null && !hasNotified) {
+            hasNotified = true;
+            onSliderImageReadyListener.onSliderImageIsReady();
+        }
     }
 
     abstract public View getView();
 
     abstract void bindViewData(View v, ImageView autoSliderImage);
-
-    SliderView(Context context) {
-        this.context = context;
-    }
 
     public String getDescription() {
         return description;
@@ -70,8 +84,8 @@ public abstract class SliderView {
 
     public void setImageByte(byte[] imageByte) {
         ContextWrapper wrapper = new ContextWrapper(context);
-        File file = new File(wrapper.getCacheDir().getAbsolutePath(),"Cached"+System.currentTimeMillis()+".jpeg");
-        Bitmap bitmap = BitmapFactory.decodeByteArray(imageByte, 0,imageByte.length);
+        File file = new File(wrapper.getCacheDir().getAbsolutePath(), "Cached" + System.currentTimeMillis() + ".jpeg");
+        Bitmap bitmap = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
         FileOutputStream out = null;
         try {
             out = new FileOutputStream(file);

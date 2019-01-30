@@ -48,7 +48,6 @@ import java.util.TimerTask;
 
 public class SliderLayout extends FrameLayout implements OnSlideChangeListener {
 
-
     private static final long DELAY_MS = 500;
     private SliderAdapter mSliderAdapter;
     private int currentPage = 0;
@@ -61,7 +60,7 @@ public class SliderLayout extends FrameLayout implements OnSlideChangeListener {
     private OnSlideChangeListener onSlideChangeListener;
     private OnSlideClickListener onSlideClickListener;
     private OnSliderImageReadyListener onSliderImageReadyListener;
-    private boolean hideShadow = false;
+    private boolean notifyOnce = false;
 
     public SliderLayout(Context context) {
         super(context);
@@ -78,15 +77,20 @@ public class SliderLayout extends FrameLayout implements OnSlideChangeListener {
         setLayout(context);
     }
 
-    public void setHideShadow(boolean hideShadow) {
-        this.hideShadow = hideShadow;
+    public void setOnSliderImageReadyListener(OnSliderImageReadyListener onSliderImageReadyListener) {
+        setOnSliderImageReadyListener(onSliderImageReadyListener, false);
     }
 
-    public void setOnSliderImageReadyListener(OnSliderImageReadyListener onSliderImageReadyListener) {
+    /**
+     * @param onSliderImageReadyListener will fire when one of provided images are ready
+     * @param notifyOnce                 default value is false
+     */
+    public void setOnSliderImageReadyListener(OnSliderImageReadyListener onSliderImageReadyListener, boolean notifyOnce) {
         this.onSliderImageReadyListener = onSliderImageReadyListener;
+        this.notifyOnce = notifyOnce;
 
         if (mSliderAdapter != null)
-            mSliderAdapter.setSliderImageReadyListener(onSliderImageReadyListener);
+            mSliderAdapter.setSliderImageReadyListener(onSliderImageReadyListener, notifyOnce);
     }
 
     public void setOnSlideChangeListener(OnSlideChangeListener onSlideChangeListener) {
@@ -117,6 +121,9 @@ public class SliderLayout extends FrameLayout implements OnSlideChangeListener {
         return scrollTimeInSec;
     }
 
+    /**
+     * @param time default value is 2sec
+     */
     public void setScrollTimeInSec(int time) {
         scrollTimeInSec = time;
         startAutoCycle();
@@ -266,13 +273,9 @@ public class SliderLayout extends FrameLayout implements OnSlideChangeListener {
         mSliderPager.addOnPageChangeListener(circularSliderHandle);
     }
 
-    public SliderAdapter getAdapter() {
-        return mSliderAdapter;
-    }
-
     public void setAdapter(SliderAdapter adapter) {
         mSliderAdapter = adapter == null ? new DefaultSliderAdapter() : adapter;
-        mSliderAdapter.setSliderImageReadyListener(onSliderImageReadyListener);
+        mSliderAdapter.setSliderImageReadyListener(onSliderImageReadyListener, notifyOnce);
         mSliderAdapter.setSlideClickListener(onSlideClickListener);
 
         mSliderPager.setAdapter(mSliderAdapter);
@@ -322,10 +325,6 @@ public class SliderLayout extends FrameLayout implements OnSlideChangeListener {
         currentPage = position;
         if (onSlideChangeListener != null)
             onSlideChangeListener.onSlideChange(currentPage);
-    }
-
-    public int getCurrentPage() {
-        return currentPage;
     }
 
     public int getPosition(SliderView sliderView) {

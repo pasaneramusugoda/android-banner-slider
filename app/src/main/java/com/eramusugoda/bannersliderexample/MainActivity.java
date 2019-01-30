@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             public void onSliderImageIsReady() {
                 Toast.makeText(MainActivity.this, "Slider is ready", Toast.LENGTH_SHORT).show();
             }
-        });
+        }, true);
 
         mSliderLayout2 = findViewById(R.id.imageSlider2);
         mSliderLayout2.setAutoScrolling(false);

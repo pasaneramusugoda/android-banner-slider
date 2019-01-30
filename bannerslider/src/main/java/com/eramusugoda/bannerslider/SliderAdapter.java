@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public abstract class SliderAdapter extends PagerAdapter {
 
     private OnSliderImageReadyListener mSliderImageReadyListener;
+    private boolean mNotifyOnce = false;
     private OnSlideClickListener mSlideClickListener;
     private ArrayList<SliderView> sliderViews;
 
@@ -64,6 +65,11 @@ public abstract class SliderAdapter extends PagerAdapter {
         mSliderImageReadyListener = sliderImageReadyListener;
     }
 
+    public void setSliderImageReadyListener(OnSliderImageReadyListener sliderImageReadyListener, boolean notifyOnce) {
+        mSliderImageReadyListener = sliderImageReadyListener;
+        mNotifyOnce = notifyOnce;
+    }
+
     @Override
     public int getCount() {
         return sliderViews == null ? 0 : sliderViews.size();
@@ -79,7 +85,7 @@ public abstract class SliderAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         SliderView imageSliderView = sliderViews.get(position);
         imageSliderView.setOnSliderClickListener(mSlideClickListener);
-        imageSliderView.setOnSliderImageReadyListener(mSliderImageReadyListener);
+        imageSliderView.setOnSliderImageReadyListener(mSliderImageReadyListener, mNotifyOnce);
         View v = imageSliderView.getView();
         container.addView(v);
         return v;
