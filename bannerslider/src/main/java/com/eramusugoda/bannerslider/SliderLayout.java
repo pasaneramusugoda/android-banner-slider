@@ -287,10 +287,6 @@ public class SliderLayout extends FrameLayout implements OnSlideChangeListener {
         startAutoCycle();
     }
 
-    public ViewPager getSliderPager() {
-        return mSliderPager;
-    }
-
     private void startAutoCycle() {
 
         if (flippingTimer != null) {
