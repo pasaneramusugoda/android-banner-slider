@@ -349,4 +349,8 @@ public class SliderLayout extends FrameLayout implements OnSlideChangeListener {
             throw new NullPointerException();
         mSliderPager.setCurrentItem(getPosition(sliderView), true);
     }
+
+    public int getSliderItemCount() {
+        return mSliderAdapter == null ? 0 : mSliderAdapter.getCount();
+    }
 }
