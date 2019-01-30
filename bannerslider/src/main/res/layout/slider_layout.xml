@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:overScrollMode="never" />
 
-    <com.eramusugoda.bannerslider.IndicatorView.PageIndicatorView
+    <com.eramusugoda.bannerslider.indicator.PageIndicatorView
         android:id="@+id/pager_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

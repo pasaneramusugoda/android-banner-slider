@@ -2,24 +2,26 @@ package com.eramusugoda.bannerslider;
 
 import androidx.viewpager.widget.ViewPager;
 
+import com.eramusugoda.bannerslider.events.OnSlideChangeListener;
+
 class CircularSliderHandle implements ViewPager.OnPageChangeListener {
     private ViewPager mViewPager;
     private int mCurrentPosition;
 
-    private CurrentPageListener currentPageListener;
+    private OnSlideChangeListener mOnSlideChangeListener;
 
     CircularSliderHandle(final ViewPager viewPager) {
         mViewPager = viewPager;
     }
 
-    void setCurrentPageListener(CurrentPageListener currentPageListener) {
-        this.currentPageListener = currentPageListener;
+    public void setOnSlideChangeListener(OnSlideChangeListener onSlideChangeListener) {
+        mOnSlideChangeListener = onSlideChangeListener;
     }
 
     @Override
     public void onPageSelected(final int position) {
         mCurrentPosition = position;
-        currentPageListener.onCurrentPageChanged(mCurrentPosition);
+        mOnSlideChangeListener.onSlideChange(mCurrentPosition);
     }
 
     @Override
@@ -36,9 +38,5 @@ class CircularSliderHandle implements ViewPager.OnPageChangeListener {
 
     @Override
     public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
-    }
-
-    interface CurrentPageListener {
-        void onCurrentPageChanged(int currentPosition);
     }
 }

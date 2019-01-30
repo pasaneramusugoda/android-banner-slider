@@ -11,6 +11,9 @@ import android.widget.ImageView;
 
 import androidx.annotation.DrawableRes;
 
+import com.eramusugoda.bannerslider.events.OnSlideClickListener;
+import com.eramusugoda.bannerslider.events.OnSliderImageReadyListener;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,11 +22,20 @@ public abstract class SliderView {
 
     @DrawableRes
     protected int imageRes = 0;
-    protected OnSliderClickListener onSliderClickListener;
+    protected OnSlideClickListener onSliderClickListener;
+    protected OnSliderImageReadyListener onSliderImageReadyListener;
     protected String description;
     protected String imageUrl;
     protected ImageView.ScaleType scaleType = ImageView.ScaleType.CENTER_CROP;
     protected Context context;
+
+    void setOnSliderClickListener(OnSlideClickListener onSliderClickListener) {
+        this.onSliderClickListener = onSliderClickListener;
+    }
+
+    void setOnSliderImageReadyListener(OnSliderImageReadyListener onSliderImageReadyListener) {
+        this.onSliderImageReadyListener = onSliderImageReadyListener;
+    }
 
     abstract public View getView();
 
@@ -91,14 +103,6 @@ public abstract class SliderView {
 
     public void setImageScaleType(ImageView.ScaleType scaleType) {
         this.scaleType = scaleType;
-    }
-
-    public void setOnSliderClickListener(OnSliderClickListener l) {
-        onSliderClickListener = l;
-    }
-
-    public interface OnSliderClickListener {
-        void onSliderClick(SliderView sliderView);
     }
 
 }

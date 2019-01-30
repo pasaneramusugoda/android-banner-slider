@@ -13,6 +13,9 @@ import com.eramusugoda.bannerslider.IndicatorAnimations;
 import com.eramusugoda.bannerslider.SliderAnimations;
 import com.eramusugoda.bannerslider.SliderLayout;
 import com.eramusugoda.bannerslider.SliderView;
+import com.eramusugoda.bannerslider.events.OnSlideChangeListener;
+import com.eramusugoda.bannerslider.events.OnSlideClickListener;
+import com.eramusugoda.bannerslider.events.OnSliderImageReadyListener;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -37,11 +40,29 @@ public class MainActivity extends AppCompatActivity {
         mSliderLayout1.setSliderTransformAnimation(SliderAnimations.FADETRANSFORMATION);
         mSliderLayout1.setScrollTimeInSec(5); //set scroll delay in seconds :
         mSliderLayout1.setAdapter(mAdapter1);
+        mSliderLayout1.setOnSlideClickListener(new OnSlideClickListener() {
+            @Override
+            public void onSlideClick(SliderView sliderView) {
+                Toast.makeText(MainActivity.this, "This is slider " + (mSliderLayout1.getPosition(sliderView) + 1), Toast.LENGTH_SHORT).show();
+            }
+        });
+        mSliderLayout1.setOnSlideChangeListener(new OnSlideChangeListener() {
+            @Override
+            public void onSlideChange(int position) {
+                Toast.makeText(MainActivity.this, "Slide Changed: " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+        mSliderLayout1.setOnSliderImageReadyListener(new OnSliderImageReadyListener() {
+            @Override
+            public void onSliderImageIsReady() {
+                Toast.makeText(MainActivity.this, "Slider is ready", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         mSliderLayout2 = findViewById(R.id.imageSlider2);
         mSliderLayout2.setAutoScrolling(false);
-        mSliderLayout2.setIndicatorAnimation(IndicatorAnimations.SWAP); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
-        mSliderLayout2.setSliderTransformAnimation(SliderAnimations.FADETRANSFORMATION);
+        mSliderLayout2.setIndicatorAnimation(IndicatorAnimations.THIN_WORM); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
+        mSliderLayout2.setSliderTransformAnimation(SliderAnimations.POPTRANSFORMATION);
         mSliderLayout2.setScrollTimeInSec(5); //set scroll delay in seconds :
         mSliderLayout2.setAdapter(mAdapter2);
 
@@ -79,18 +100,12 @@ public class MainActivity extends AppCompatActivity {
                 sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
                 sliderView.setDescription("The quick brown fox jumps over the lazy dog.\n" +
                         "Jackdaws love my big sphinx of quartz. " + (i + 1));
-                final int finalI = i;
-
-                sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
-                    @Override
-                    public void onSliderClick(SliderView sliderView) {
-                        Toast.makeText(MainActivity.this, "This is slider " + (finalI + 1), Toast.LENGTH_SHORT).show();
-
-                    }
-                });
 
                 if (ii == 0) mAdapter1.addSliderView(sliderView);
-                else mAdapter2.addSliderView(sliderView);
+                else {
+                    sliderView.setHideShadow(true);
+                    mAdapter2.addSliderView(sliderView);
+                }
             }
         }
     }

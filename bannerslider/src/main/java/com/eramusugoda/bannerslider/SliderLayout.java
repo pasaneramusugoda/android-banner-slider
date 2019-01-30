@@ -10,48 +10,58 @@ import android.widget.FrameLayout;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.eramusugoda.bannerslider.IndicatorView.PageIndicatorView;
-import com.eramusugoda.bannerslider.IndicatorView.animation.type.AnimationType;
-import com.eramusugoda.bannerslider.Transformations.AntiClockSpinTransformation;
-import com.eramusugoda.bannerslider.Transformations.Clock_SpinTransformation;
-import com.eramusugoda.bannerslider.Transformations.CubeInDepthTransformation;
-import com.eramusugoda.bannerslider.Transformations.CubeInRotationTransformation;
-import com.eramusugoda.bannerslider.Transformations.CubeInScalingTransformation;
-import com.eramusugoda.bannerslider.Transformations.CubeOutDepthTransformation;
-import com.eramusugoda.bannerslider.Transformations.CubeOutRotationTransformation;
-import com.eramusugoda.bannerslider.Transformations.CubeOutScalingTransformation;
-import com.eramusugoda.bannerslider.Transformations.DepthTransformation;
-import com.eramusugoda.bannerslider.Transformations.FadeTransformation;
-import com.eramusugoda.bannerslider.Transformations.FanTransformation;
-import com.eramusugoda.bannerslider.Transformations.FidgetSpinTransformation;
-import com.eramusugoda.bannerslider.Transformations.GateTransformation;
-import com.eramusugoda.bannerslider.Transformations.HingeTransformation;
-import com.eramusugoda.bannerslider.Transformations.HorizontalFlipTransformation;
-import com.eramusugoda.bannerslider.Transformations.PopTransformation;
-import com.eramusugoda.bannerslider.Transformations.SimpleTransformation;
-import com.eramusugoda.bannerslider.Transformations.SpinnerTransformation;
-import com.eramusugoda.bannerslider.Transformations.TossTransformation;
-import com.eramusugoda.bannerslider.Transformations.VerticalFlipTransformation;
-import com.eramusugoda.bannerslider.Transformations.VerticalShutTransformation;
-import com.eramusugoda.bannerslider.Transformations.ZoomOutTransformation;
+import com.eramusugoda.bannerslider.events.OnSlideChangeListener;
+import com.eramusugoda.bannerslider.events.OnSlideClickListener;
+import com.eramusugoda.bannerslider.events.OnSliderImageReadyListener;
+import com.eramusugoda.bannerslider.indicator.PageIndicatorView;
+import com.eramusugoda.bannerslider.indicator.animation.type.AnimationType;
+import com.eramusugoda.bannerslider.transformations.AntiClockSpinTransformation;
+import com.eramusugoda.bannerslider.transformations.Clock_SpinTransformation;
+import com.eramusugoda.bannerslider.transformations.CubeInDepthTransformation;
+import com.eramusugoda.bannerslider.transformations.CubeInRotationTransformation;
+import com.eramusugoda.bannerslider.transformations.CubeInScalingTransformation;
+import com.eramusugoda.bannerslider.transformations.CubeOutDepthTransformation;
+import com.eramusugoda.bannerslider.transformations.CubeOutRotationTransformation;
+import com.eramusugoda.bannerslider.transformations.CubeOutScalingTransformation;
+import com.eramusugoda.bannerslider.transformations.DepthTransformation;
+import com.eramusugoda.bannerslider.transformations.FadeTransformation;
+import com.eramusugoda.bannerslider.transformations.FanTransformation;
+import com.eramusugoda.bannerslider.transformations.FidgetSpinTransformation;
+import com.eramusugoda.bannerslider.transformations.GateTransformation;
+import com.eramusugoda.bannerslider.transformations.HingeTransformation;
+import com.eramusugoda.bannerslider.transformations.HorizontalFlipTransformation;
+import com.eramusugoda.bannerslider.transformations.PopTransformation;
+import com.eramusugoda.bannerslider.transformations.SimpleTransformation;
+import com.eramusugoda.bannerslider.transformations.SpinnerTransformation;
+import com.eramusugoda.bannerslider.transformations.TossTransformation;
+import com.eramusugoda.bannerslider.transformations.VerticalFlipTransformation;
+import com.eramusugoda.bannerslider.transformations.VerticalShutTransformation;
+import com.eramusugoda.bannerslider.transformations.ZoomOutTransformation;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class SliderLayout extends FrameLayout implements CircularSliderHandle.CurrentPageListener {
+/**
+ * @author Pasan
+ * @since 01/30/19
+ */
+
+public class SliderLayout extends FrameLayout implements OnSlideChangeListener {
 
 
     private static final long DELAY_MS = 500;
-    private SliderAdapter mFlippingPagerAdapter;
+    private SliderAdapter mSliderAdapter;
     private int currentPage = 0;
-    private CircularSliderHandle circularSliderHandle;
     private ViewPager mSliderPager;
     private PageIndicatorView pagerIndicator;
     private int scrollTimeInSec = 2;
     private Handler handler = new Handler();
     private Timer flippingTimer;
     private boolean autoScrolling = true;
-
+    private OnSlideChangeListener onSlideChangeListener;
+    private OnSlideClickListener onSlideClickListener;
+    private OnSliderImageReadyListener onSliderImageReadyListener;
+    private boolean hideShadow = false;
 
     public SliderLayout(Context context) {
         super(context);
@@ -68,6 +78,28 @@ public class SliderLayout extends FrameLayout implements CircularSliderHandle.Cu
         setLayout(context);
     }
 
+    public void setHideShadow(boolean hideShadow) {
+        this.hideShadow = hideShadow;
+    }
+
+    public void setOnSliderImageReadyListener(OnSliderImageReadyListener onSliderImageReadyListener) {
+        this.onSliderImageReadyListener = onSliderImageReadyListener;
+
+        if (mSliderAdapter != null)
+            mSliderAdapter.setSliderImageReadyListener(onSliderImageReadyListener);
+    }
+
+    public void setOnSlideChangeListener(OnSlideChangeListener onSlideChangeListener) {
+        this.onSlideChangeListener = onSlideChangeListener;
+    }
+
+    public void setOnSlideClickListener(OnSlideClickListener onSlideClickListener) {
+        this.onSlideClickListener = onSlideClickListener;
+
+        if (mSliderAdapter != null)
+            mSliderAdapter.setSlideClickListener(onSlideClickListener);
+    }
+
     public boolean isAutoScrolling() {
         return autoScrolling;
     }
@@ -77,8 +109,8 @@ public class SliderLayout extends FrameLayout implements CircularSliderHandle.Cu
         startAutoCycle();
     }
 
-    private PagerAdapter getFlippingPagerAdapter() {
-        return mFlippingPagerAdapter;
+    private PagerAdapter getSliderAdapter() {
+        return mSliderAdapter;
     }
 
     public int getScrollTimeInSec() {
@@ -171,8 +203,8 @@ public class SliderLayout extends FrameLayout implements CircularSliderHandle.Cu
     }
 
     public int getCurrentPagePosition() {
-        if (getFlippingPagerAdapter() != null) {
-            return mSliderPager.getCurrentItem() % mFlippingPagerAdapter.getCount();
+        if (getSliderAdapter() != null) {
+            return mSliderPager.getCurrentItem() % mSliderAdapter.getCount();
         } else {
             throw new NullPointerException("Adapter not set");
         }
@@ -228,18 +260,22 @@ public class SliderLayout extends FrameLayout implements CircularSliderHandle.Cu
         pagerIndicator.setDynamicCount(true);
 
         // Handler for onPageChangeListener
-        circularSliderHandle = new CircularSliderHandle(mSliderPager);
-        circularSliderHandle.setCurrentPageListener(this);
+        CircularSliderHandle circularSliderHandle = new CircularSliderHandle(mSliderPager);
+        circularSliderHandle.setOnSlideChangeListener(this);
+
         mSliderPager.addOnPageChangeListener(circularSliderHandle);
     }
 
     public SliderAdapter getAdapter() {
-        return mFlippingPagerAdapter;
+        return mSliderAdapter;
     }
 
     public void setAdapter(SliderAdapter adapter) {
-        mFlippingPagerAdapter = adapter == null ? new DefaultSliderAdapter() : adapter;
-        mSliderPager.setAdapter(mFlippingPagerAdapter);
+        mSliderAdapter = adapter == null ? new DefaultSliderAdapter() : adapter;
+        mSliderAdapter.setSliderImageReadyListener(onSliderImageReadyListener);
+        mSliderAdapter.setSlideClickListener(onSlideClickListener);
+
+        mSliderPager.setAdapter(mSliderAdapter);
         if (pagerIndicator != null && mSliderPager != null) {
             pagerIndicator.setViewPager(mSliderPager);
         }
@@ -263,7 +299,7 @@ public class SliderLayout extends FrameLayout implements CircularSliderHandle.Cu
         //Cancel If Thread is Running
         final Runnable scrollingThread = new Runnable() {
             public void run() {
-                if (getFlippingPagerAdapter() == null || currentPage == getFlippingPagerAdapter().getCount()) {
+                if (getSliderAdapter() == null || currentPage == getSliderAdapter().getCount()) {
                     currentPage = 0;
                 }
                 // true set for smooth transition between pager
@@ -282,7 +318,20 @@ public class SliderLayout extends FrameLayout implements CircularSliderHandle.Cu
     }
 
     @Override
-    public void onCurrentPageChanged(int currentPosition) {
-        this.currentPage = currentPosition;
+    public void onSlideChange(int position) {
+        currentPage = position;
+        if (onSlideChangeListener != null)
+            onSlideChangeListener.onSlideChange(currentPage);
+    }
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public int getPosition(SliderView sliderView) {
+        if (mSliderAdapter == null || mSliderAdapter.getSliderViews() == null)
+            return -1;
+
+        return mSliderAdapter.getSliderViews().indexOf(sliderView);
     }
 }
