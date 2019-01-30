@@ -38,6 +38,7 @@ import com.eramusugoda.bannerslider.transformations.VerticalFlipTransformation;
 import com.eramusugoda.bannerslider.transformations.VerticalShutTransformation;
 import com.eramusugoda.bannerslider.transformations.ZoomOutTransformation;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -332,5 +333,12 @@ public class SliderLayout extends FrameLayout implements OnSlideChangeListener {
             return -1;
 
         return mSliderAdapter.getSliderViews().indexOf(sliderView);
+    }
+
+    public List<SliderView> getSliderItems() {
+        if (mSliderAdapter == null)
+            return null;
+
+        return mSliderAdapter.getSliderViews();
     }
 }
